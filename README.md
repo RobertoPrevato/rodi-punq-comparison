@@ -17,7 +17,7 @@ services. This difference is explained by an implementation detail:
 Create a Python virtual environment, then install requirements
 
 ```
-$ python3.9 -m venv venv
+$ python -m venv venv
 ```
 
 Activate the virtual environment:
@@ -45,7 +45,7 @@ $ ipython
 Import the functions and use `%timeit` to measure functions' performance:
 
 ```
-Python 3.9.0 (default, Oct 25 2020, 08:40:04)
+Python 3.8.1 (tags/v3.8.1:1b293b6, Dec 18 2019, 22:39:24) [MSC v.1916 32 bit (Intel)]
 Type 'copyright', 'credits' or 'license' for more information
 IPython 7.19.0 -- An enhanced Interactive Python. Type '?' for help.
 
@@ -54,14 +54,14 @@ In [1]: from example.rodi_test import rodi_main
 In [2]: from example.punq_test import punq_main
 
 In [3]: %timeit rodi_main()
-9.06 µs ± 14.7 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+6.6 µs ± 394 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 
 In [4]: %timeit rodi_main()
-9.25 µs ± 106 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+6.39 µs ± 320 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 
 In [5]: %timeit punq_main()
-261 µs ± 899 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+176 µs ± 7.4 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 
 In [6]: %timeit punq_main()
-254 µs ± 331 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+181 µs ± 14.3 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 ```
