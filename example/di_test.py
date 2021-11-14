@@ -38,8 +38,8 @@ class ConsoleGreeter(Greeter):
 container.bind(di.Dependant(ConsoleGreeter), Greeter)
 
 provider = container.solve(di.Dependant(Greeter))
-# warmup
-container.execute_sync(provider, validate_scopes=False)
+# warmup to build execution caches and validate scopes
+container.execute_sync(provider, validate_scopes=True)
 
 def di_main():
     greeter = container.execute_sync(provider, validate_scopes=False)
