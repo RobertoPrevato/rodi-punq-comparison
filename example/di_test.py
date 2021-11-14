@@ -1,8 +1,9 @@
 import di
+from di.executors import SimpleSyncExecutor
 import os
 
 
-container = di.Container()
+container = di.Container(executor=SimpleSyncExecutor())
 
 
 class ConfigReader:
@@ -37,10 +38,11 @@ class ConsoleGreeter(Greeter):
 container.bind(di.Dependant(ConsoleGreeter), Greeter)
 
 provider = container.solve(di.Dependant(Greeter))
-
+# warmup
+container.execute_sync(provider, validate_scopes=False)
 
 def di_main():
-    greeter = container.execute_sync(provider)
+    greeter = container.execute_sync(provider, validate_scopes=False)
     assert isinstance(greeter, ConsoleGreeter)
 
 
