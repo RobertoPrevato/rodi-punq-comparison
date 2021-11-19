@@ -39,7 +39,7 @@ provider = container.solve(di.Dependant(Greeter))
 
 
 def di_main():
-    greeter = container.execute_sync(provider, validate_scopes=False)
+    greeter = container.execute_sync(provider)
     assert isinstance(greeter, ConsoleGreeter)
 
 
