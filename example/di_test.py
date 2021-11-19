@@ -36,7 +36,8 @@ class ConsoleGreeter(Greeter):
 
 container.bind(di.Dependant(ConsoleGreeter), Greeter)
 provider = container.solve(di.Dependant(Greeter))
-
+# warmup
+provider = container.solve(di.Dependant(Greeter))
 
 def di_main():
     greeter = container.execute_sync(provider)
