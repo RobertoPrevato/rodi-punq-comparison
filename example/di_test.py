@@ -2,7 +2,7 @@ import di
 import os
 
 
-container = di.Container()
+container = di.Container(scopes=(None,))
 
 
 class ConfigReader:
@@ -18,7 +18,7 @@ class EnvironmentConfigReader(ConfigReader):
         }
 
 
-container.bind(di.Dependant(EnvironmentConfigReader), ConfigReader)
+container.register_by_type(di.Dependant(EnvironmentConfigReader), ConfigReader)
 
 
 class Greeter:
@@ -34,13 +34,13 @@ class ConsoleGreeter(Greeter):
         print(self.config["greeting"])
 
 
-container.bind(di.Dependant(ConsoleGreeter), Greeter)
+container.register_by_type(di.Dependant(ConsoleGreeter), Greeter)
 provider = container.solve(di.Dependant(Greeter))
-# warmup
-provider = container.solve(di.Dependant(Greeter))
+executor = di.SyncExecutor()
 
 def di_main():
-    greeter = container.execute_sync(provider)
+    with container.enter_scope(None):
+        greeter = container.execute_sync(provider, executor=executor)
     assert isinstance(greeter, ConsoleGreeter)
 
 
