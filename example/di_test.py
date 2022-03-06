@@ -1,8 +1,9 @@
 import di
+from di.container import bind_by_type
 import os
 
 
-container = di.Container(scopes=(None,))
+container = di.Container()
 
 
 class ConfigReader:
@@ -18,7 +19,7 @@ class EnvironmentConfigReader(ConfigReader):
         }
 
 
-container.register_by_type(di.Dependant(EnvironmentConfigReader), ConfigReader)
+container.bind(bind_by_type(di.Dependant(EnvironmentConfigReader), ConfigReader))
 
 
 class Greeter:
@@ -34,8 +35,8 @@ class ConsoleGreeter(Greeter):
         print(self.config["greeting"])
 
 
-container.register_by_type(di.Dependant(ConsoleGreeter), Greeter)
-provider = container.solve(di.Dependant(Greeter))
+container.bind(bind_by_type(di.Dependant(ConsoleGreeter), Greeter))
+provider = container.solve(di.Dependant(Greeter), scopes=(None,))
 executor = di.SyncExecutor()
 
 def di_main():

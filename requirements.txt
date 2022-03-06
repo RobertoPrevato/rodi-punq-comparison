@@ -2,7 +2,7 @@ appdirs==1.4.4
 backcall==0.2.0
 black==20.8b1
 click==7.1.2
-di==0.51.0
+di==0.66.1
 decorator==4.4.2
 ipython==7.19.0
 ipython-genutils==0.2.0
